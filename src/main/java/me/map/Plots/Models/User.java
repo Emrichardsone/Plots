@@ -2,44 +2,47 @@ package me.map.Plots.Models;
 
 import org.hibernate.validator.constraints.Email;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
 
+
+@Entity
 public class User {
+
     //fields//
-    private Integer userId;
+    @Id
+    @GeneratedValue
+    private int id;
 
     @NotNull
     @Email
-    public String email;
+    private String email;
 
     @NotNull
-    public String password;
-
-    @NotNull
-    @Size(min=5, max=30)
-    private String username;
+    private String password;
 
 
     //Constructors://
-    public User (){
-
+    public User() {
     }
+
     public User(String email, String password) {
-        this.userId = userId;
+
         this.email = email;
         this.password = password;
     }
 
 
-        //Getters and Setters//
+    //Getters and Setters//
 
-     public Integer getUserId() {
-    return userId;
+    public int id() {
+        return id;
     }
 
-    public void setUserid(Integer userId) {
-        this.userId = userId;
+    public void setUserid(int id) {
+        this.id = id;
     }
 
     public String getEmail() {
@@ -58,18 +61,9 @@ public class User {
         this.password = password;
     }
 
-    public String getUsername() {
-        return username;
-    }
 
-    public void setUsername(String username) {
-        this.username = username;
-    }
+}
 
 
 
-    }
-
-
-    //TODO Create UserFields //
 
