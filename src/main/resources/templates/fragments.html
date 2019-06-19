@@ -5,7 +5,25 @@
     <title>Hello</title>
 </head>
 <body>
-<h1 th:text=""></h1>
 
+<head th:fragment="head">
+
+    <!-- Bootstrap stylesheets and script -->
+    <link th:href="@{/css/stylesheet.css}" rel="stylesheet" />
 </body>
+
+<div th:fragment="page-header" class="navbar">
+    <div class="container">
+        <div class="navbar-header">
+            <a th:href="@{/}" class="navbar-brand">Map Story</a>
+        </div>
+        <div class="navbar-collapse collapse">
+            <ul class="navtext">
+                <li>Search</li>
+                <li>List</li>
+                <li>Add</li>
+            </ul>
+        </div>
+    </div>
+</div>
 </html>
