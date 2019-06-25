@@ -1,10 +1,32 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org/">
 <head th:replace="fragments :: head">
-</head>
-<body>
 
-<h1> <a th:ref="@{/registration}">Hello, World.</a></h1>
+</head>
+
+    <body>
+    <div class="row">
+        <div class="col=2">
+        <img src="/img/MapStoryLogo.png"/>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col=4">
+            <h1> <a th:ref="/registration">MapStory. Stories take place.</a></h1>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-8">MapStory</div>
+        <div class="col-3">2</div>
+        <div class="col-3">Stories Take Place</div>
+        <div class="col-3">4</div>
+    </div>
+
+        <div class="row">
+            <div class="col-md-1">md1</div>
+        </div>
+
 
 </body>
 </html>

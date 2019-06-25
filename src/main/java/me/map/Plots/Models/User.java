@@ -2,14 +2,18 @@ package me.map.Plots.Models;
 
 import org.hibernate.validator.constraints.Email;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
 
 
 @Entity
+@Table(name = "user")
 public class User {
+
 
     //fields//
     @Id
@@ -17,19 +21,24 @@ public class User {
     private int id;
 
     @NotNull
-    @Email
+    @Email(message = "Please enter a valid email")
+    @Size(min=8)
     private String email;
 
     @NotNull
     private String password;
+
+    @OneToMany
+    @JoinColumn(name="user_id")
+    private List<MapStory> stories = new ArrayList<>();
 
 
     //Constructors://
     public User() {
     }
 
-    public User(String email, String password) {
-
+    public User(String email, String password, List<MapStory> stories) {
+        this.stories=stories;
         this.email = email;
         this.password = password;
     }
@@ -37,7 +46,7 @@ public class User {
 
     //Getters and Setters//
 
-    public int id() {
+    public int getId() {
         return id;
     }
 
@@ -59,6 +68,10 @@ public class User {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public List<MapStory> getMapStory(){
+        return stories;
     }
 
 

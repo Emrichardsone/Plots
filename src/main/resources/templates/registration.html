@@ -1,32 +1,41 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org/">
-<head>
-    <meta charset="UTF-8"/>
-</head>
-<body>
-    <div>
-    <h1>Resgister</h1>
-    </div>
 
-    <form action="/registration" th:action="@{/registration}" th:object="${user}" method="post">
-    <table>
-        <tr>
-            <td><label>Email</label></td>
-            <td><input type="text" th:field="*{email}"/></td>
-        </tr>
-        <tr>
-            <td><label>Password</label></td>
-            <td><input type="password" th:field="*{password}"/></td>
-        </tr>
-        <tr>
-            <td><label>Verify Password</label></td>
-            <td><input type="password" name="verify" /></td>
-        </tr>
-        <tr>
-            <td><input type="submit" value="Let's Do This"/></td>
-        </tr>
-    </table>
+<head th:replace="fragments :: head">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.5.1/dist/leaflet.css"
+          integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ=="
+          crossorigin=""/>
+    <script src="https://unpkg.com/leaflet@1.5.1/dist/leaflet.js"
+            integrity="sha512-GffPMF3RvMeYyc1LWMHtK8EbPv0iNZ8/oTtHPx9/cc2ILxQ+u905qIwdpULaqDkyBKgOaB57QTMg7ztg8Jm2Og=="
+            crossorigin=""></script>
+</head>
+
+<body>
+
+    <form action="/registration" th:action="@{/registration}" th:object="${userForm}" method="post">
+        <div class="form-group">
+            <label th:for="email">Email</label>
+            <input type="email" class="form-control" id="inputEmail" th:field="*{user.email}" placeholder="email"/>
+            <p th:errors="${user.email}"></p>
+        </div>
+
+        <div class="form-group">
+            <label th:for="password">Password</label>
+            <input type="password" class="form-control" id="inputpassword" th:field="*{user.password}" placeholder="password"/>
+        </div>
+
+        <div class="form-group">
+            <label>Verify Password</label>
+            <input type="password" class="form-control" th:field="*{verify}"/>
+        </div>
+
+        <input type="submit" value="Let's Do This"/>
+
+
     </form>
+    <div id="mapid"></div>
+
+
 
 </body>
 </html>
