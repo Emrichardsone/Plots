@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+
+<head th:replace="fragments :: head">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.5.1/dist/leaflet.css"
+          integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ=="
+          crossorigin=""/>
+    <script src="https://unpkg.com/leaflet@1.5.1/dist/leaflet.js"
+            integrity="sha512-GffPMF3RvMeYyc1LWMHtK8EbPv0iNZ8/oTtHPx9/cc2ILxQ+u905qIwdpULaqDkyBKgOaB57QTMg7ztg8Jm2Og=="
+            crossorigin=""></script>
+</head>
+
+<body>
+<div class="ui centered grid">
+    <div class="eight wide column">
+        <form class="ui form" th:object="${signupForm}" method="post">
+            <div class="field">
+                <label>Email Address</label>
+                <input type="text" placeholder="Email" th:field="*{email}" name="email" />
+                <div class="ui error message visible" th:if="${#fields.hasErrors('email')}" th:errors="*{email}">Email Error</div>
+            </div>
+            <div class="field">
+                <label>Password</label>
+                <input
+                        type="password"
+                        placeholder="Password"
+                        style="background-image: url(&quot;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR4nGP6zwAAAgcBApocMXEAAAAASUVORK5CYII=&quot;);"
+                        autocomplete="off"
+                        th:field="*{password}"
+                        name="password"
+                />
+                <div class="ui error message visible" th:if="${#fields.hasErrors('password')}" th:errors="*{password}">Password Error</div>
+            </div>
+            <div class="field">
+                <label>Verify Password</label>
+                <input
+                        type="password"
+                        placeholder="Verify Password"
+                        style="background-image: url(&quot;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR4nGP6zwAAAgcBApocMXEAAAAASUVORK5CYII=&quot;);"
+                        autocomplete="off"
+                        th:field="*{confirmPassword}"
+                        name="confirmPassword"
+                />
+                <div class="ui error message visible" th:if="${#fields.hasErrors('confirmPassword')}" th:errors="*{confirmPassword}">Confirm Password Error</div>
+            </div>
+            <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+
+            <div class="ui error message visible" th:if="${error}" th:text="${error}">Some Error</div>
+
+            <div class="ui submit button">Signup</div>
+        </form>
+    </div>
+
+</div>
+<div th:replace="fragments :: script"></div>
+
+<script type="application/javascript">
+        $(document)
+    .ready(function() {
+      $('.ui.form')
+        .form({
+          fields: {
+            email: {
+              identifier  : 'email',
+              rules: [
+                {
+                  type   : 'empty',
+                  prompt : 'Please enter your e-mail'
+                },
+                {
+                  type   : 'email',
+                  prompt : 'Please enter a valid e-mail'
+                }
+              ]
+            },
+            password: {
+              identifier  : 'password',
+              rules: [
+                {
+                  type   : 'empty',
+                  prompt : 'Please enter your password'
+                },
+                {
+                  type   : 'length[6]',
+                  prompt : 'Your password must be at least 6 characters'
+                }
+              ]
+            }
+          }
+        })
+      ;
+    })
+  ;
+
+</script>
+<div id="mapid"></div>
+
+
+</body>
+</html>

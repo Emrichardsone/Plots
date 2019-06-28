@@ -1,10 +1,20 @@
-package me.map.Plots.Models;
+package me.map.Plots.models;
 
 public class UserForm {
 
     private User user;
 
     private String verify;
+
+    private String password;
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
 
     public UserForm() {
     }
@@ -30,10 +40,9 @@ public class UserForm {
         this.verify = verify;
     }
 
+
     public Boolean ismatching(){
-        if (user.getPassword().equals(verify)){
-            return true;
-        }
-        return false;
-    }
+        return getPassword().equals(verify);
+}
+
 }

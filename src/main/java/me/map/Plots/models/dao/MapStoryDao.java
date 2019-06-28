@@ -1,6 +1,6 @@
-package me.map.Plots.Models.data;
+package me.map.Plots.models.dao;
 
-import me.map.Plots.Models.User;
+import me.map.Plots.models.MapStory;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 import javax.transaction.Transactional;
@@ -8,7 +8,6 @@ import javax.transaction.Transactional;
 
 @Repository
 @Transactional
-public interface UserDao extends CrudRepository<User, Integer>{
+public interface MapStoryDao extends CrudRepository<MapStory, Integer>{
 
 }
-

@@ -24,21 +24,13 @@ map.addControl(drawControl);
             drawnItems.addLayer(layer);
         });
 
-map.on("draw:created", function (e) {
-    var type = e.layerType,
-        layer = e.layer;
 
-    if (type === 'marker') {
-        // Do marker specific actions
-        var latlng = e.layer._latlng;
-        var lat = $("form input[name='lat']").val(latlng.lat);
-        var lng = $("form input[name='lng']").val(latlng.lng);
-    }
+var lat = parseFloat( $("#lat").html());
+var lng = parseFloat($("#lng").html());
+var marker = L.marker([lat, lng]).addTo(map);
 
-    map.addLayer(layer);
 
-map.on
-L.marker([lat, lng]).addTo(map);
 
-});
+
+
 

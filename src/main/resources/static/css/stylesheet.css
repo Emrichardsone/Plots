@@ -18,6 +18,7 @@ width: 75vw;
 height: 75vh;
 object-fit: cover;
 
+
 }
 :root {
   --input-padding-x: 1.5rem;
@@ -168,4 +169,8 @@ object-fit: cover;
 
 .leaflet-control-geocoder-expanded .leaflet-control-geocoder-form {
 	padding: 5px;
+}
+
+form{
+float: right;
 }
