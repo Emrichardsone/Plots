@@ -25,11 +25,17 @@ map.addControl(drawControl);
         });
 
 
-var lat = parseFloat( $("#lat").html());
-var lng = parseFloat($("#lng").html());
-var marker = L.marker([lat, lng]).addTo(map);
+//var lat = parseFloat( $("#lat").html());
+//var lng = parseFloat($("#lng").html());
+//var marker = L.marker([lat, lng]).addTo(map);
 
-
+fetch("/api/10")
+.then(r => r.json())
+.then(r => {
+	r.points.forEach(point => {
+		L.marker([point.lat, point.lng]).addTo(map);
+    });
+});
 
 
 

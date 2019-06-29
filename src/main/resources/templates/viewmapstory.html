@@ -13,11 +13,8 @@
 <div class="card-deck">
     <div class="card">
         <div class="card-body">
-            <h4 class="card-title" th:text="${newMapStory.mapStoryTitle}"></h4>
-            <p class="card-text" th:text="${newMapStory.plotLocation}">.</p>
-            <p class="card-text" th:text="${newMapStory.storyText}"></p>
-            <p class="card-text" id="lat" th:text="${newMapStory.lat}"></p>
-            <p class="card-text" id="lng" th:text="${newMapStory.lng}"></p>
+            <h4 class="card-title" th:text="${story.mapStoryTitle}"></h4>
+            <p class="card-text" th:text="${story.plotLocation}">.</p>
 
         </div>
     </div>

@@ -21,22 +21,14 @@ public class MapStory {
     @NotNull
     private String mapStoryTitle;
 
-    @NotNull
-    private String storyText;
 
     @JsonIgnore
     @ManyToOne
     private User user;
 
-    @NotNull
-    private double lat;
 
-    @NotNull
-    private double lng;
-
-    @OneToMany
-    @JoinColumn
-    private List<PlotPoint> points = new ArrayList<>();
+    @OneToMany(fetch=FetchType.EAGER, mappedBy = "mapStory")
+    private List<PlotPoint> points;
 
     public MapStory(){
     }
@@ -44,7 +36,7 @@ public class MapStory {
     public MapStory(String plotLocation, String mapStoryTitle) {
         this.plotLocation = plotLocation;
         this.mapStoryTitle = mapStoryTitle;
-        this.storyText = storyText;
+
     }
 
     public int getId() {
@@ -71,14 +63,6 @@ public class MapStory {
         this.mapStoryTitle = mapStoryTitle;
     }
 
-    public String getStoryText() {
-        return storyText;
-    }
-
-    public void setStoryText(String storyText) {
-        this.storyText = storyText;
-    }
-
     public User getUser(){
         return user;
     }
@@ -87,27 +71,11 @@ public class MapStory {
         this.user=user;
     }
 
-    public double getLat() {
-        return lat;
-    }
-
-    public void setLat(double lat) {
-        this.lat = lat;
-    }
-
-    public double getLng() {
-        return lng;
-    }
-
-    public void setLng(double lng) {
-        this.lng = lng;
+    public void setPoints(List<PlotPoint> points) {
+        this.points = points;
     }
 
     public List<PlotPoint> getPoints() {
         return points;
-    }
-
-    public void setPoints(List<PlotPoint> points) {
-        this.points = points;
     }
 }

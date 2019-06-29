@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+
+
+<head th:replace="fragments :: head">
+
+</head>
+
+
+<body>
+
+<div>
+    <h1>Add a Plot Point to <span th:text="${mapStory.mapStoryTitle}"></span></h1>
+
+</div>
+<div class="row">
+    <div class="col-md-4">
+        <form th:object="${plotPoint}" method="post">
+            <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
+
+            <table>
+                <tr>
+                    <td><label>Plot Point Title</label></td>
+                    <td><input type="text" th:field="*{plotPointTitle}"/></td>
+                </tr>
+
+                <tr>
+                    <td><label>What did you do here?</label></td>
+                    <td><input type="text" th:field="*{plotStory}"/></td>
+                </tr>
+<!--                <tr>-->
+<!--                    <div class="form-group">-->
+<!--                        <td><label for="Textarea1">Story Text:</label></td>-->
+<!--                        <td><textarea class="form-control" id="Textarea1" rows="3"></textarea></td>-->
+<!--                    </div>-->
+<!--                </tr>-->
+
+                <input type="hidden" name="lat" th:field="*{lat}"/>
+                <input type="hidden" name="lng" th:field="*{lng}"/>
+                <tr>
+                    <td><input type="submit" value="Save Plot Point"/></td>
+                </tr>
+            </table>
+        </form>
+    </div>
+
+    <div id="mapContainer" class="col-md-10">
+        <script src="https://unpkg.com/leaflet@1.5.1/dist/leaflet.js"></script>
+
+        <script type="application/javascript">
+
+    var map = L.map('mapContainer').setView([50, -0.09], 5);
+    L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoiZW1tYXIxMTYiLCJhIjoiY2p4NmJta3BrMDF5djRhczJkeHJpa2ZrbSJ9.cXAK6dADsONnen5z6lHKCw', {
+    maxZoom: 18,
+    id: 'mapbox.streets',
+    accessToken:'pk.eyJ1IjoiZW1tYXIxMTYiLCJhIjoiY2p4NmJta3BrMDF5djRhczJkeHJpa2ZrbSJ9.cXAK6dADsONnen5z6lHKCw'
+    }).addTo(map);
+
+        </script>
+
+    </div>
+</div>
+
+<script type="application/javascript"
+        src="https://cdnjs.cloudflare.com/ajax/libs/leaflet.draw/1.0.4/leaflet.draw.js">
+
+</script>
+
+<script th:src="@{/js/addmapstory.js}" type="application/javascript"></script>
+
+</body>
+</html>

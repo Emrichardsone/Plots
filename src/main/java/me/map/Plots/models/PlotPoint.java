@@ -3,10 +3,7 @@ package me.map.Plots.models;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
 
 @Entity
 public class PlotPoint {
@@ -23,8 +20,9 @@ public class PlotPoint {
 
     private String plotStory;
 
+    @ManyToOne(fetch= FetchType.EAGER)
+    @JoinColumn(name="map_story_id")
     @JsonIgnore
-    @ManyToOne
     private MapStory mapStory;
 
     public PlotPoint(){}

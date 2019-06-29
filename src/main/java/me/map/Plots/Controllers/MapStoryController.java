@@ -5,16 +5,14 @@ import me.map.Plots.models.MyUserPrincipal;
 import me.map.Plots.models.PlotPoint;
 import me.map.Plots.models.User;
 import me.map.Plots.models.dao.MapStoryDao;
+import me.map.Plots.models.dao.PlotPointDao;
 import me.map.Plots.models.dao.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -31,6 +29,17 @@ public class MapStoryController {
     @Autowired
     UserRepository userRepository;
 
+    @Autowired
+    PlotPointDao plotPointDao;
+
+    @GetMapping("{storyId}")
+    public String getStory(@PathVariable int storyId, Model model) {
+        MapStory story = mapStoryDao.findOne(storyId);
+        model.addAttribute("story", story);
+        return "viewmapstory";
+
+    }
+
     @RequestMapping(value = "", method = RequestMethod.GET)
     public String getMapForm(Model model, HttpServletRequest req,
                              HttpServletResponse res) {
@@ -45,12 +54,8 @@ public class MapStoryController {
     public String addMapFromForm(
             @ModelAttribute @Valid MapStory newMapStory, Errors errors, @ModelAttribute PlotPoint plotPoint,
 
-            Model model)
-    {
+            Model model) {
         model.addAttribute("newMapStory", newMapStory);
-        model.addAttribute("lat", newMapStory.getLat());
-        model.addAttribute("lng", newMapStory.getLng());
-        model.addAttribute("plotPoint", new PlotPoint());
         Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         String username;
         if (principal instanceof MyUserPrincipal) {
@@ -62,8 +67,34 @@ public class MapStoryController {
         newMapStory.setUser(user);
         mapStoryDao.save(newMapStory);
 
-        return "viewmapstory";
+        return "redirect:/mapstory/" + newMapStory.getId() + "/plotpoint/new";
     }
 
+    @RequestMapping(value = "{storyId}/plotpoint/new", method = RequestMethod.GET)
+    public String getPlotPointForm(@PathVariable int storyId, Model model) {
+
+        MapStory story = mapStoryDao.findOne(storyId);
+        model.addAttribute("mapStory", story);
+        PlotPoint pp = new PlotPoint();
+        pp.setMapStory(story);
+        model.addAttribute("plotPoint", pp);
+//        HttpSession mySession = req.getSession();
+//        model.addAttribute("session");
+        return "plotpoint";
+    }
+
+    @RequestMapping(value = "{storyId}/plotpoint/new", method = RequestMethod.POST)
+    public String addMapFromForm(
+            @PathVariable int storyId,
+            @ModelAttribute @Valid PlotPoint newPlotPoint,
+            Model model) {
+
+        MapStory story = mapStoryDao.findOne(storyId);
+        newPlotPoint.setMapStory(story);
+        plotPointDao.save(newPlotPoint);
+
+        return "redirect:/mapstory/" + storyId;
+
+    }
 }
 
