@@ -8,22 +8,14 @@
         <img src="/img/maplogo.png"/>
         </div>
     </div>
-    <div class="row">
-        <div class="col=4">
-            <h1> <a href="/signup">MapStory. Stories take place.</a></h1>
-        </div>
-    </div>
 
-    <div class="row">
-        <div class="col-8">MapStory</div>
-        <div class="col-3">2</div>
-        <div class="col-3">Stories Take Place</div>
-        <div class="col-3">4</div>
+    <table>
+    <div th:each="one: ${story}">
+        <td th:text="${one.mapStoryTitle}" />
+        <td th:text="${one.plotLocation}" />
+        <a th:href="${'/mapstory/'+one.id}" class="btn btn-primary">See this story</a>
     </div>
-
-        <div class="row">
-            <div class="col-md-1">md1</div>
-        </div>
+    </table>
 
 
 </body>

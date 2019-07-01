@@ -29,13 +29,17 @@ map.addControl(drawControl);
 //var lng = parseFloat($("#lng").html());
 //var marker = L.marker([lat, lng]).addTo(map);
 
-fetch("/api/10")
+var storyId=parseInt($("#storyId").val());
+
+
+fetch("/api/"+ storyId)
 .then(r => r.json())
 .then(r => {
 	r.points.forEach(point => {
 		L.marker([point.lat, point.lng]).addTo(map);
     });
-});
+
+    });
 
 
 

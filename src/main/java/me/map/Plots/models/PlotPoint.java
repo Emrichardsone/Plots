@@ -18,12 +18,12 @@ public class PlotPoint {
 
     private String plotPointTitle;
 
-    private String plotStory;
+    public String plotStory;
 
     @ManyToOne(fetch= FetchType.EAGER)
     @JoinColumn(name="map_story_id")
     @JsonIgnore
-    private MapStory mapStory;
+    public MapStory mapStory;
 
     public PlotPoint(){}
 

@@ -16,20 +16,20 @@ import org.springframework.validation.Errors;
 
 import javax.validation.Valid;
 
-@Controller
-@RequestMapping(value = "")
-public class HomeController {
-
-    @Autowired
-    UserRepository userRepository;
-
-    @Autowired
-    MapStoryDao mapStoryDao;
-
-    @RequestMapping(value = "")
-    public String index() {
-        return "index";
-    }
+//@Controller
+//@RequestMapping(value = "")
+//public class HomeController {
+//
+//    @Autowired
+//    UserRepository userRepository;
+//
+//    @Autowired
+//    MapStoryDao mapStoryDao;
+//
+//    @RequestMapping(value = "")
+//    public String index() {
+//        return "index";
+//    }
 //
 //    @RequestMapping(value = "signup", method = RequestMethod.GET)
 //    public String regForm(Model model) {
@@ -66,9 +66,9 @@ public class HomeController {
 //    @RequestMapping (value="login", method=RequestMethod.POST)
 //    public String postLogin (Errors errors){
 //        return "redirect:mapstory";
-//    }
-
-}
+////    }
+//
+//}
 
 
 

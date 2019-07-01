@@ -7,31 +7,34 @@
 </head>
 <body>
 
+<form>
+    <input type="hidden" id="storyId" th:value="${storyId}"/>
+</form>
+
 <div>
     <h1 th:text="'Welcome to MapStory'"></h1>
 </div>
-<div class="card-deck">
-    <div class="card">
-        <div class="card-body">
-            <h4 class="card-title" th:text="${story.mapStoryTitle}"></h4>
-            <p class="card-text" th:text="${story.plotLocation}">.</p>
+<div class="card-deck d-flex flex-wrap">
+    <div class="card" th:each="point : ${story.points}">
+        <div class="card-body" >
+            <h4 class="card-title" th:text="${point.plotPointTitle}"></h4>
+            <p class="card-text" th:text="${point.plotStory}"></p>
 
         </div>
+
     </div>
-    <div class="card">
-        <div class="card-body">
-            <h4 class="card-title"></h4>
-            <p class="card-text"></p>
-        </div>
-    </div>
-    <div class="card">
-        <div class="card-body">
-            <h4 class="card-title"></h4>
-            <p class="card-text"></p>
-        </div>
-    </div>
+
 </div>
+<div class="card text-center">
 
+    <div class="card-body">
+        <h5 class="card-title">Want to add another plot point?</h5>
+<!--        <p class="card-text">It's a broader card with text below as a natural lead-in to extra content. This content is a little longer.</p>-->
+        <a th:href="${'/mapstory/'+storyId+'/plotpoint/new'}"  class="btn btn-primary">Yes! Add new plot point.</a>
+        <a href="/index" class="btn btn-primary">All done</a>
+    </div>
+
+</div>
 <div id="mapContainer" class="col-md-10">
     <script src="https://unpkg.com/leaflet@1.5.1/dist/leaflet.js"></script>
 
