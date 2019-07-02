@@ -30,16 +30,20 @@ map.addControl(drawControl);
 //var marker = L.marker([lat, lng]).addTo(map);
 
 var storyId=parseInt($("#storyId").val());
+//var popUp=($("#popUp"));
+//var popUp=("hi");
 
 
 fetch("/api/"+ storyId)
 .then(r => r.json())
 .then(r => {
 	r.points.forEach(point => {
-		L.marker([point.lat, point.lng]).addTo(map);
+		L.marker([point.lat, point.lng]).addTo(map).bindPopup(point.plotPointTitle);
+
     });
 
     });
+
 
 
 

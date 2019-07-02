@@ -39,7 +39,18 @@ map.on("draw:created", function (e) {
 
 
 map.on
-L.marker([lat, lng]).addTo(map);
+L.marker([lat, lng]).addTo(map)
 
 });
+var storyId=parseInt($("#mapStory").val());
+
+fetch("/api/"+ storyId)
+.then(r => r.json())
+.then(r => {
+	r.points.forEach(point => {
+		L.marker([point.lat, point.lng]).addTo(map).bindPopup('hi');
+
+    });
+
+    });
 
